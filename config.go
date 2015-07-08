@@ -20,11 +20,8 @@ func LoadConfig(path string) (Config, error) {
 
 	data, err := ioutil.ReadFile(path)
 	if err != nil {
-		return err
+		return m, err
 	}
 	err = json.Unmarshal(data, &m)
-	if err != nil {
-		return err
-	}
-	return m, nil
+	return m, err
 }
