@@ -1,7 +1,9 @@
 package pages
 
 import (
+	"io"
 	"io/ioutil"
+	"text/template"
 
 	"github.com/russross/blackfriday"
 )
@@ -16,6 +18,14 @@ type Page struct {
 func NewPage(configPath string) (*Page, error) {
 	p := &Page{File: configPath}
 	return p, p.load()
+}
+
+func (p *Page) Render(layout string, w io.Writer) error {
+	t, err := template.ParseFiles(layout)
+	if err != nil {
+		return err
+	}
+	return t.Execute(w, p)
 }
 
 func (p *Page) load() error {
