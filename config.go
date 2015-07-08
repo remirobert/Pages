@@ -15,7 +15,7 @@ func (c Config) Author() string {
 	return c["author"].(string)
 }
 
-func LoadConfig(path string) (config, error) {
+func LoadConfig(path string) (Config, error) {
 	var m map[string]interface{}
 
 	data, err := ioutil.ReadFile(path)
