@@ -15,6 +15,8 @@ type Page struct {
 	File   string
 }
 
+const configFile = "config.json"
+
 func NewPage(configPath string) (*Page, error) {
 	p := &Page{File: configPath}
 	return p, p.load()
@@ -29,7 +31,7 @@ func (p *Page) Render(layout string, w io.Writer) error {
 }
 
 func (p *Page) load() error {
-	c, err := LoadConfig("config.json")
+	c, err := LoadConfig(configFile)
 	if err != nil {
 		return err
 	}
